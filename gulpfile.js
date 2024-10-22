@@ -111,7 +111,7 @@ async function html() {
         headCSS,
         SVGOMG_VERSION: changelog[0].version,
         SVGO_VERSION,
-        liveBaseUrl: 'https://jakearchibald.github.io/svgomg/',
+        liveBaseUrl: 'https://svgomg.robmeyer.net',
         title: `SVGOMG - SVGO's Missing GUI`,
         description: 'Easy & visual compression of SVG images.',
         iconPath: 'imgs/icon.png',
@@ -142,17 +142,17 @@ async function js(entry, outputPath) {
       IS_DEV_TASK
         ? ''
         : rollupTerser(
-            name === 'page'
-              ? {
-                  ...buildConfig.terser,
-                  mangle: {
-                    properties: {
-                      regex: /^_/,
-                    },
-                  },
-                }
-              : buildConfig.terser,
-          ),
+          name === 'page'
+            ? {
+              ...buildConfig.terser,
+              mangle: {
+                properties: {
+                  regex: /^_/,
+                },
+              },
+            }
+            : buildConfig.terser,
+        ),
     ],
   });
 
