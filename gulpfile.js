@@ -79,12 +79,11 @@ function copy() {
   return gulp
     .src([
       'src/manifest.json',
+      'src/changelog.json',
       'src/{.well-known,imgs,test-svgs,fonts}/**',
       // Exclude the test-svgs files except for `car-lite.svg`
       // which is used in the demo
       '!src/test-svgs/!(car-lite.svg)',
-      '!src/imgs/maskable.svg',
-      'src/*.json',
     ])
     .pipe(gulp.dest('build'));
 }
@@ -112,10 +111,12 @@ async function html() {
         headCSS,
         SVGOMG_VERSION: changelog[0].version,
         SVGO_VERSION: SVGO.VERSION,
-        liveBaseUrl: 'https://svgomg.robmeyer.net',
+        liveBaseUrl: IS_DEV_TASK ? 'http://localhost:8080/' : 'https://svgomg.robmeyer.net/',
         title: `SVGOMG - SVGO's Missing GUI`,
         description: 'Easy & visual compression of SVG images.',
-        iconPath: 'imgs/icon.png',
+        faviconPath: 'imgs/favicon.ico',
+        iconSvgPath: 'imgs/maskable.svg',
+        iconAppleTouchPath: 'imgs/apple-touch-icon.png',
       }),
     )
     .pipe(gulpif(!IS_DEV_TASK, gulpHtmlmin(buildConfig.htmlmin)))

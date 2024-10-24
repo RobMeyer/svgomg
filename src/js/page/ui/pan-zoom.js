@@ -87,18 +87,18 @@ export default class PanZoom {
         return;
       }
 
-      document.removeEventListener('mousemove', this._onPointerMove);
-      document.removeEventListener('mouseup', this._onPointerUp);
-      document.removeEventListener('touchmove', this._onPointerMove);
-      document.removeEventListener('touchend', this._onPointerUp);
+      document.removeEventListener('mousemove', this._onPointerMove, { passive: false });
+      document.removeEventListener('mouseup', this._onPointerUp, { passive: false });
+      document.removeEventListener('touchmove', this._onPointerMove, { passive: false });
+      document.removeEventListener('touchend', this._onPointerUp, { passive: false });
     };
 
     // bound events
-    eventArea.addEventListener('mousedown', this._onPointerDown);
-    eventArea.addEventListener('touchstart', this._onPointerDown);
+    eventArea.addEventListener('mousedown', this._onPointerDown, { passive: false });
+    eventArea.addEventListener('touchstart', this._onPointerDown, { passive: false });
 
     // unbound
-    eventArea.addEventListener('wheel', (event) => this._onWheel(event));
+    eventArea.addEventListener('wheel', (event) => this._onWheel(event), { passive: false });
   }
 
   reset() {

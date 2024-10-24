@@ -5,13 +5,13 @@ export default class MaterialSlider {
     // prettier-ignore
     this.container = strToEl(
       '<div class="material-slider">' +
-        '<div class="track">' +
-          '<div class="track-on"></div>' +
-          '<div class="handle">' +
-            '<div class="arrow"></div>' +
-            '<div class="val"></div>' +
-          '</div>' +
-        '</div>' +
+      '<div class="track">' +
+      '<div class="track-on"></div>' +
+      '<div class="handle">' +
+      '<div class="arrow"></div>' +
+      '<div class="val"></div>' +
+      '</div>' +
+      '</div>' +
       '</div>'
     );
 
@@ -23,10 +23,10 @@ export default class MaterialSlider {
     this._range.parentNode.insertBefore(this.container, this._range);
     this.container.insertBefore(this._range, this.container.firstChild);
 
-    this._range.addEventListener('input', () => this._onInputChange());
-    this._range.addEventListener('mousedown', () => this._onRangeMouseDown());
-    this._range.addEventListener('touchstart', () => this._onRangeTouchStart());
-    this._range.addEventListener('touchend', () => this._onRangeTouchEnd());
+    this._range.addEventListener('input', () => this._onInputChange(), { passive: true });
+    this._range.addEventListener('mousedown', () => this._onRangeMouseDown(), { passive: true });
+    this._range.addEventListener('touchstart', () => this._onRangeTouchStart(), { passive: true });
+    this._range.addEventListener('touchend', () => this._onRangeTouchEnd(), { passive: true });
 
     this._setPosition();
   }
@@ -56,7 +56,7 @@ export default class MaterialSlider {
       document.removeEventListener('mouseup', upListener);
     };
 
-    document.addEventListener('mouseup', upListener);
+    document.addEventListener('mouseup', upListener, { passive: true });
   }
 
   _onInputChange() {
