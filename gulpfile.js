@@ -78,6 +78,7 @@ const minifyCss = vinylMap((buffer) => {
 function copy() {
   return gulp
     .src([
+      'src/manifest.json',
       'src/{.well-known,imgs,test-svgs,fonts}/**',
       // Exclude the test-svgs files except for `car-lite.svg`
       // which is used in the demo
